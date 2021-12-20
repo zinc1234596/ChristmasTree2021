@@ -251,7 +251,7 @@
 </head>
 
 <body>
-  <div class="message"> Merry Christmas</div>
+  <div class="message" id="message"> Merry Christmas</div>
   <br />
   <div class="christmas-tree-container" id="tree">
     <div class="glow"></div>
@@ -534,6 +534,7 @@
       sw = document.documentElement.clientWidth;
       // sw = 3000
       sh = document.documentElement.clientHeight;
+
       //动态的创建一个灰色的背景div，就是那个我们带点击后，大图后面的那个灰色的那个背景，当然灰色是可以自由设置的
       gdiv = document.createElement('div');
       gdiv.id = 'gray';
@@ -542,11 +543,11 @@
       document.body.appendChild(gdiv);
       document.getElementById('tree').style.display = 'none'
       //删除动态的图片和对象，就是我们点击放大后，再次点击的时候，放大的图片会被删除，并且后面的那个背景也会随之删除，这个方法就是为了完成这个效果
-      gdiv.onclick = function () {
-        document.body.removeChild(this);
-        document.body.removeChild(oimg);
-        document.getElementById('tree').style.display = 'block'
-      }
+      // gdiv.onclick = function () {
+      //   document.body.removeChild(this);
+      //   document.body.removeChild(oimg);
+      //   document.getElementById('tree').style.display = 'block'
+      // }
       //创建动态的图片对象，将该对象的src赋值为原图的src,这就是来创建我们放大后看大的那个图片
       oimg = document.createElement('img');
       oimg.src = pic.src;
@@ -556,6 +557,11 @@
       // oimg.style.top = (sh - ih) / 2 + 'px';
       // oimg.style.left = (sw - ih) / 2 + 'px';
       document.body.appendChild(oimg);
+      message = document.getElementById('message')
+      oimg.onclick = function () {
+        document.body.removeChild(gdiv);
+        document.body.removeChild(oimg); document.getElementById('tree').style.display = 'block'
+      }
     }
     //设置图片的位置来适应窗口的大小
     window.onresize = function () {
